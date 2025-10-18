@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Zakaria Ben Larbi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22d3ee;
+      --primary: #3b82f6;
+      --glow: 0 0 20px rgba(34, 211, 238, 0.5);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 20% 20%, #0e1a34, var(--bg) 80%);
+      overflow-x: hidden;
+    }
+    #particles {
+      position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%;
+    }
+    .hero { text-align: center; padding: 100px 20px 50px; position: relative; }
+    .photo-container { position: relative; display: inline-block; }
+    .profile-photo {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 4px solid var(--accent); object-fit: cover;
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.4);
+      animation: float 6s ease-in-out infinite;
+    }
+    .halo {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(34,211,238,0.25), transparent 70%);
+      border-radius: 50%; filter: blur(60px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    @keyframes pulse { 0%,100%{opacity:0.5;transform:translate(-50%,-50%)scale(1);} 50%{opacity:0.8;transform:translate(-50%,-50%)scale(1.1);} }
+    h1 { font-size: 2.8em; margin-top: 20px; text-shadow: var(--glow); }
+    .subtitle { color: var(--muted); font-size: 1.1em; }
+    .stats {
+      display: flex; justify-content: center; gap: 40px; margin-top: 30px; flex-wrap: wrap;
+    }
+    .stats div {
+      background: var(--card); border-radius: var(--radius); padding: 16px 24px; text-align: center;
+      border: 1px solid #1f2937; transition: 0.3s;
+    }
+    .stats div:hover { transform: scale(1.05); box-shadow: var(--glow); }
+    .stats strong { font-size: 1.5em; color: var(--accent); display: block; }
+    section { padding: 70px 20px; max-width: 1000px; margin: auto; text-align: center; }
+    section h2 {
+      font-size: 2em; color: var(--accent); margin-bottom: 30px;
+      text-shadow: 0 0 12px rgba(34,211,238,0.3);
+    }
+    #about p { line-height: 1.8; font-size: 1.05em; max-width: 800px; margin: auto; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap: 20px; margin-top: 30px;
+    }
+    .skills-grid div {
+      background: var(--card); border-radius: var(--radius); padding: 20px; border: 1px solid #1f2937;
+      transition: 0.3s;
+    }
+    .skills-grid div:hover { transform: scale(1.1); box-shadow: var(--glow); }
+    .skills-grid i { color: var(--accent); font-size: 2em; margin-bottom: 10px; }
+    .timeline { margin-top: 40px; }
+    .event {
+      background: var(--card); border: 1px solid #1f2937; border-radius: var(--radius);
+      padding: 20px; margin-bottom: 30px; text-align: left;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2); transition: 0.3s;
+    }
+    .event:hover { transform: translateY(-5px); box-shadow: var(--glow); }
+    .event h3 { color: var(--accent); margin-bottom: 10px; }
+    .event ul { margin-left: 18px; color: var(--muted); list-style-type: square; }
+    .cards {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 20px; margin-top: 20px;
+    }
+    .card {
+      background: var(--card); border-radius: var(--radius); border: 1px solid #1f2937;
+      padding: 25px; transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: var(--glow); }
+    .card i { color: var(--accent); margin-bottom: 10px; }
+    #contact p { color: var(--text); font-size: 1.05em; margin: 8px 0; }
+    #contact a { color: var(--accent); text-decoration: none; }
+    #contact a:hover { color: white; }
+    footer {
+      text-align: center; padding: 40px 20px; color: var(--muted);
+      font-size: 0.9em; border-top: 1px solid #1f2937;
+    }
+    .fade-in { opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width:700px){h1{font-size:2.1em;}.stats{gap:20px;}}
+
+    .skills-cats{margin:22px 0;text-align:left}
+.skills-cats h3{color:#cfe9ff;font-size:1.1em;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  background:var(--card);
+  border:1px solid #1f2937;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:600;
+}
+/* Désactiver le gras dans le corps de texte, garder les titres inchangés */
+p strong, li strong { 
+  font-weight: 400;   /* ou: inherit */
+}
+/* --- Top Navigation --- */
+.topbar{
+  position: sticky; top:0; z-index: 999;
+  backdrop-filter: blur(10px);
+  background: rgba(11,18,32,0.65);
+  border-bottom: 1px solid #1f2937;
+}
+.topbar-inner{
+  max-width: 1100px; margin: 0 auto; padding: 10px 16px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.brand{display:flex; align-items:center; gap:10px; color:var(--text); font-weight:700; text-decoration:none}
+.brand .dot{width:10px; height:10px; background:var(--accent); border-radius:50%}
+.toplinks{display:flex; gap:12px; flex-wrap:wrap}
+.toplinks a{
+  color: var(--muted); text-decoration:none; font-weight:600;
+  padding: 8px 10px; border-radius:10px; transition:.2s;
+}
+.toplinks a:hover{background:#0b2540; color:var(--text)}
+.burger{display:none; background:transparent; border:0; color:var(--text); font-size:1.2rem; padding:8px}
+
+/* Décalage d’ancrage pour la barre collante */
+section{scroll-margin-top: 80px}
+/* ===== NAV GLASMORPHIC ===== */
+.topbar.pro{
+  position: sticky; top: 0; z-index: 1000;
+  background: linear-gradient(180deg, rgba(8,14,28,.7), rgba(8,14,28,.45));
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+.topbar-inner{
+  max-width: 1100px; margin: 0 auto; padding: 12px 18px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+.brand-text{font-weight:800; letter-spacing:.2px; color:#e8f3ff}
+.orb{
+  width:10px; height:10px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #22d3ee, #3b82f6 70%);
+  box-shadow: 0 0 14px rgba(34,211,238,.9);
+}
+.toplinks{display:flex; gap:18px; justify-content:center}
+.toplinks a{
+  position:relative; padding:8px 2px; font-weight:600; color:#c8d3e6; text-decoration:none;
+  transition: color .2s ease;
+}
+.toplinks a:hover{color:#ffffff}
+.toplinks a::after{
+  content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0%;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6);
+  border-radius:2px; transition: width .25s ease;
+}
+.toplinks a:hover::after{width:100%}
+.toplinks a.active{color:#fff}
+.toplinks a.active::after{width:100%}
+.cta-link{
+  padding:8px 14px; border-radius:12px; text-decoration:none; font-weight:700;
+  color:#0b1220; background:linear-gradient(90deg,#22d3ee,#3b82f6);
+  box-shadow: 0 8px 24px rgba(34,211,238,.35);
+  border:1px solid rgba(255,255,255,.15);
+}
+.cta-link:hover{filter:brightness(1.08)}
+.burger{display:none; background:transparent; border:0; color:#eaf3ff; font-size:1.2rem; padding:8px}
+@media (max-width: 860px){
+  .burger{display:block}
+  .toplinks{display:none}
+  .cta-link{display:none}
+  body.menu-open .toplinks{
+    display:flex; position:absolute; left:0; right:0; top:100%;
+    flex-direction:column; gap:0;
+    background: rgba(8,14,28,.96);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    animation: drop .18s ease;
+  }
+  .toplinks a{padding:14px 18px}
+  @keyframes drop{from{transform:translateY(-8px);opacity:0}to{transform:none;opacity:1}}
+}
+/* Décalage d’ancrage pour la barre collante */
+section{scroll-margin-top: 92px}
+.pro-summary{
+  max-width: 900px; margin: 14px auto 0; padding: 10px 16px;
+  background: linear-gradient(180deg, rgba(34,211,238,.08), rgba(59,130,246,.06));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; line-height: 1.6;
+  color: #cfe3ff;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.pro-summary span{
+  color:#eaf3ff; font-weight:600;
+  text-decoration: underline; text-decoration-color: rgba(34,211,238,.6);
+  text-underline-offset: 3px;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <nav class="topbar pro" id="top">
+  <div class="topbar-inner">
+    
+
+    <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('menu-open')">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="toplinks">
+      <a href="#about">À propos</a>
+      <a href="#skills">Compétences</a>
+      <a href="#stages">Stages</a>
+      <a href="#benevolat">Bénévolat</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#projects">Projets</a>
+      <a href="#certifications">Certificats</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+  </div>
+</nav>
+
+
+
+  <canvas id="particles"></canvas>
+
+  <header class="hero fade-in">
+  <div class="photo-container">
+    <img src="img/zakaria.jpeg" alt="Zakaria Ben Larbi" class="profile-photo" />
+    <div class="halo"></div>
+  </div>
+
+  <h1 class="name-glow">Zakaria Ben Larbi</h1>
+<p class="subtitle">
+  Étudiant en dernière année d’ingénierie — Sciences Géomatiques & Ingénierie Topographique
+</p>
+<p class="pro-summary">
+  Ingénieur géomaticien orienté <span>expertise immobilière</span>, avec une forte culture 
+  <span>digitalisation</span>, <span>SIG</span> et <span>IA appliquée</span>. 
+  10+ missions réelles, 2 plugins QGIS, et projets IA (GeoAI, détection & CRNN).
+</p>
+
+</header>
+
+
+ <section id="about" class="fade-in">
+  <h2>À propos</h2>
+  <div class="container grid cols-2">
+
+    <!-- Texte de présentation -->
+    <div class="card" style="text-align: left;">
+      <p>
+        Passionné par <strong>l’expertise immobilière</strong>, j’oriente mes travaux vers la 
+        <strong>valorisation de la donnée géospatiale</strong> et la 
+        <strong>modernisation des outils d’évaluation</strong>.
+      </p>
+      <p style="margin-top:10px;">
+        Mon parcours à l’<strong>IAV Hassan II</strong> en 
+        <strong>Sciences Géomatiques et Ingénierie Topographique</strong>, 
+        combiné à une <strong>grande part d’autoformation</strong> et de 
+        <strong>rigueur personnelle</strong>, m’a permis d’acquérir des compétences solides en 
+        <strong>SIG</strong>, <strong>programmation Python</strong>, <strong>télédétection</strong> 
+        et <strong>intelligence artificielle appliquée à l’immobilier</strong>.
+      </p>
+      <p style="margin-top:10px;">
+        J’aime concevoir des <strong>solutions numériques sur mesure</strong> — 
+        <em>plugins QGIS</em>, <em>formulaires intelligents</em>, 
+        <em>automatisations</em> — afin de rendre l’expertise 
+        <strong>plus rapide, fiable et centrée sur la donnée</strong>.
+      </p>
+    </div>
+
+    <!-- Encadré infos -->
+    <div class="card" style="text-align: left;">
+      <h3 style="color: var(--accent); margin-bottom: 10px;">
+        <i class="fa-solid fa-user-tie"></i> Profil rapide
+      </h3>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li><i class="fa-solid fa-graduation-cap"></i> Étudiant ingénieur — IAV Hassan II</li>
+        <li><i class="fa-solid fa-map-location-dot"></i> Spécialité : Sciences Géomatiques & Ingénierie Topographique</li>
+        <li><i class="fa-solid fa-building"></i> Passion : Expertise immobilière & innovation numérique</li>
+        <li><i class="fa-solid fa-laptop-code"></i> Compétences clés : QGIS, Python, IA, SIG, Télédétection</li>
+      </ul>
+      <hr style="margin: 15px 0; border-color: #1f2937;">
+      <h3 style="color: var(--accent); margin-bottom: 10px;">
+        <i class="fa-solid fa-heart"></i> Centres d’intérêt
+      </h3>
+      <p style="color: var(--muted);">
+        Expertise immobilière, géomatique, automatisation des processus, innovation technologique, 
+        intelligence artificielle, valorisation foncière et visualisation spatiale.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <section id="skills" class="fade-in">
+  <h2>Compétences techniques</h2>
+
+  <!-- SIG & Topographie -->
+  <div class="skills-cats">
+    <h3><i class="fa-solid fa-map"></i> SIG & Topographie</h3>
+    <div class="chips">
+      <span class="chip">QGIS</span>
+      <span class="chip">SIG</span>
+      <span class="chip">Photogrammétrie</span>
+      <span class="chip">Télédétection</span>
+      <span class="chip">ERDAS</span>
+      <span class="chip">AutoCAD</span>
+      <span class="chip">Revit</span>
+    </div>
+  </div>
+
+  <!-- IA / Vision par ordinateur -->
+  <div class="skills-cats">
+    <h3><i class="fa-solid fa-brain"></i> IA & Vision par ordinateur</h3>
+    <div class="chips">
+      <span class="chip">YOLOv8</span>
+      <span class="chip">Détection d’objets</span>
+      <span class="chip">Segmentation</span>
+      <span class="chip">CNN</span>
+      <span class="chip">RNN</span>
+      <span class="chip">CRNN</span>
+      <span class="chip">Machine Learning</span>
+      <span class="chip">OpenCV</span>
+    </div>
+  </div>
+
+  <!-- Dev & Données -->
+  <div class="skills-cats">
+    <h3><i class="fa-solid fa-code"></i> Développement & Données</h3>
+    <div class="chips">
+      <span class="chip">Python</span>
+      <span class="chip">Django</span>
+      <span class="chip">SQL</span>
+      <span class="chip">Pandas</span>
+      <span class="chip">NumPy</span>
+      <span class="chip">Google Colab</span>
+    </div>
+  </div>
+
+  <!-- Soft skills -->
+  <div class="skills-cats">
+    <h3><i class="fa-solid fa-people-group"></i> Soft skills</h3>
+    <div class="chips">
+      <span class="chip">Travail d’équipe</span>
+      <span class="chip">Communication</span>
+      <span class="chip">Rigueur</span>
+      <span class="chip">Autonomie</span>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section id="stages" class="fade-in">
+  <h2>Stages</h2>
+  <div class="timeline">
+
+    <!-- Stage professionnel 2025 -->
+    <div class="event">
+      <h3>Avril – Mai 2025 — Stage Professionnel</h3>
+      <p>
+        Stage d’un mois et demi consacré à la <strong>topographie et géodésie appliquées</strong>.
+        Réalisé dans le cadre du cycle ingénieur à l’IAV Hassan II.
+      </p>
+      <ul style="margin-top:10px;">
+        <li>Exécution de <strong>travaux géodésiques</strong> : densification du réseau par GNSS et nivellement de précision.</li>
+        <li>Réalisation d’un <strong>plan topographique</strong> détaillé d’une zone à <em>Sidi Allal Bahraoui</em>.</li>
+        <li>Travaux d’<strong>aérotriangulation</strong> et de <strong>restitution photogrammétrique</strong>.</li>
+        <li>Production d’une <strong>orthophotographie</strong> à partir d’un levé aérien de la même zone.</li>
+      </ul>
+      <p style="margin-top:10px;">
+        Stage axé sur la rigueur géométrique et la maîtrise des procédés de traitement topographique avancés.
+      </p>
+    </div>
+
+    <!-- Stage d'expertise immobilière 2025 -->
+    <div class="event">
+      <h3>Août – Septembre 2025 — Terra Modus</h3>
+      <p>
+        Stage de deux mois en tant que <strong>stagiaire évaluateur immobilier</strong> au sein du cabinet 
+        <strong>Terra Modus</strong>, acteur de référence en expertise immobilière et topographie.  
+        Implication directe dans la <strong>réalisation complète des missions d’expertise</strong> : 
+        visites de terrain, collecte et traitement de données, rédaction et contrôle des rapports.
+      </p>
+      <ul style="margin-top:10px;">
+        <li>Traitement et valorisation de <strong>plus de dix dossiers réels</strong> (bancaires, OPCI, amiables, agricoles).</li>
+        <li>Analyse foncière, vérification urbanistique et contrôles techniques sur site.</li>
+        <li>Développement de la <strong>fiche de visite numérique</strong> et de deux <strong>plugins QGIS</strong> 
+        (<em>tirage des comparables</em> et <em>alimentation de la base de données</em>).</li>
+        <li>Automatisation des tâches répétitives — <strong>gain de temps supérieur à 70 %</strong>.</li>
+      </ul>
+      <p style="margin-top:10px;">
+        Expérience marquante combinant <strong>rigueur technique</strong>, 
+        <strong>expertise métier</strong> et <strong>innovation numérique</strong>.
+      </p>
+    </div>
+
+    <!-- Stage entreprise 2024 -->
+    <div class="event">
+      <h3>Août 2024 — Terra Modus</h3>
+      <p><strong>Stage d’entreprise (12 jours)</strong></p>
+      <ul>
+        <li>Participation à des projets majeurs : CHU Ibn Sina (Rabat) et complexe sportif Moulay Abdellah.</li>
+        <li>Utilisation d’équipements topographiques avancés (stations totales, Leica RTC360, BLK2Go).</li>
+        <li>Levés et mesures topographiques de haute précision sur chantiers complexes.</li>
+      </ul>
+    </div>
+
+    <!-- Stage Cadastre et Conservation -->
+    <div class="event">
+      <h3>Juillet 2024 — ANCFCC</h3>
+      <p>
+        <strong>Stage Cadastre (10 jours)</strong> et <strong>Stage Conservation Foncière (5 jours)</strong> réalisés dans le cadre du cycle ingénieur.
+      </p>
+      <ul>
+        <li>Participation à la gestion complète des dossiers cadastraux, de la réception à la validation.</li>
+        <li>Observation du processus de traitement et d’enregistrement des titres fonciers.</li>
+        <li>Compréhension de la <strong>collaboration entre le Cadastre et la Conservation Foncière</strong>.</li>
+        <li>Découverte du cadre légal et technique de la sécurisation foncière au Maroc.</li>
+      </ul>
+    </div>
+
+    <!-- Stage administratif -->
+    
+
+  </div>
+</section>
+
+
+<!-- PARCOURS (FORMATION) -->
+<!-- PARCOURS (FORMATION) -->
+<section id="parcours" class="fade-in">
+  <h2>Parcours</h2>
+  <div class="timeline">
+
+    <div class="event">
+      <h3>Institut Agronomique et Vétérinaire Hassan II</h3>
+      <p><strong>Sciences Géomatiques et Ingénierie Topographique</strong></p>
+      <p class="muted">2021 – 2026</p>
+    </div>
+
+    <div class="event">
+      <h3>Lycée Salmane El Farissi – Témara</h3>
+      <p><strong>Baccalauréat en Sciences Physiques et Chimiques</strong> — Mention Très Bien</p>
+      <p class="muted">2020 – 2021</p>
+    </div>
+
+  </div>
+</section>
+
+
+  
+
+  <section id="projects" class="fade-in">
+  <h2>Projets phares</h2>
+  <div class="cards">
+
+    <!-- Plugin QGIS - Tirage des comparables -->
+    <div class="card"><i class="fa-solid fa-layer-group fa-2x"></i>
+      <h3>Plugin QGIS — Tirage des comparables</h3>
+      <p>Automatisation du processus de recherche, filtrage et export des transactions comparables pour les missions d’expertise immobilière.</p>
+      <ul>
+        <li>Utilisation d’un index spatial R-Tree pour la recherche rapide de comparables.</li>
+        <li>Export SHP automatique avec les comprabels retenu ainsi que le titre objet d'étude .</li>
+
+        <li>Export Excel automatique avec formules, diagnostics et synthèse.</li>
+        <li>Gain de temps supérieur à <strong>70 %</strong> sur le processus d’analyse.</li>
+      </ul>
+    </div>
+
+    <!-- Plugin QGIS - Alimentation base de données -->
+    <div class="card"><i class="fa-solid fa-database fa-2x"></i>
+      <h3>Plugin QGIS — Alimentation de la base de données</h3>
+      <p>Outil interne de fusion, contrôle et intégration des données cadastrales et terrain dans une base SIG centralisée.</p>
+      <ul>
+        <li>Intégration automatisée des fichiers <strong>CadGIS, Excel et relevés terrain</strong>.</li>
+        <li>Nettoyage des doublons, harmonisation des formats et enrichissement spatial.</li>
+        <li>Production d’une base unique d’expertise géoréférencée (EPSG:26191).</li>
+      </ul>
+    </div>
+
+    <!-- Fiche de visite numérique -->
+    <div class="card"><i class="fa-solid fa-file-signature fa-2x"></i>
+      <h3>Fiche de visite numérique</h3>
+      <p>Application Web automatisée de collecte et génération de rapports de fiche de viste pour expertise immobilière.</p>
+      <ul>
+        <li>Formulaire intelligent avec signatures électroniques (expert et visiteur).</li>
+        <li>Export automatique en PDF structuré à partir de modèles Google Docs.</li>
+        <li>Traçabilité complète des visites : signatures, photos, et coordonnées géographiques.</li>
+      </ul>
+    </div>
+
+    <!-- GeoAI -->
+    <div class="card"><i class="fa-solid fa-brain fa-2x"></i>
+      <h3>Segmentation de bâtiments par GeoAI</h3>
+      <p>Projet de <strong>Deep Learning</strong> appliqué à la segmentation d’images satellites pour la cartographie urbaine.</p>
+      <ul>
+        <li>Développement d’un pipeline complet : prétraitement, fine-tuning, post-traitement et vectorisation.</li>
+        <li>Modèle GeoAI optimisé pour images Sentinel et Google Earth Engine.</li>
+        <li>Production de cartes thématiques précises du bâti utilisables dans QGIS.</li>
+      </ul>
+    </div>
+
+    <!-- Télédétection / Biomasse -->
+    <div class="card"><i class="fa-solid fa-seedling fa-2x"></i>
+      <h3>Estimation de la biomasse par télédétection</h3>
+      <p>Pipeline d’analyse des indices spectraux Sentinel-2 et classification par <strong>Random Forest</strong>.</p>
+      <ul>
+        <li>Fusion de six indices spectraux (NDVI, EVI, SAVI, etc.).</li>
+        <li>Classification binaire et trinaire validée avec une précision globale de <strong>98 %</strong>.</li>
+        <li>Application en zone semi-aride (région de l’Oriental, Maroc).</li>
+      </ul>
+    </div>
+
+    <!-- Projet AMETOP 2025 -->
+    <div class="card">
+  <i class="fa-solid fa-car-side fa-2x"></i>
+  <h3>Système intelligent de gestion de stationnement — Projet AMETOP 2025</h3>
+  <p>
+    Conception et développement d’un système complet de <strong>vision par ordinateur</strong> 
+    dédié à la <strong>gestion intelligente du stationnement urbain</strong>, 
+    intégrant différentes interfaces (utilisateur et administrateur) 
+    et des fonctionnalités d’<strong>automatisation urbaine</strong>.
+  </p>
+  <ul>
+    <li>Création et <strong>collecte du jeu de données</strong> (plus de 600 images de plaques marocaines).</li>
+    <li>Implémentation de <strong>YOLOv8</strong> pour la détection en temps réel des véhicules et plaques d’immatriculation.</li>
+    <li>Entraînement d’un modèle <strong>CRNN</strong> pour la reconnaissance automatique des caractères.</li>
+    <li>Déploiement d’une <strong>application web responsive</strong> pour la supervision dynamique du stationnement.</li>
+  </ul>
+</div>
+
+
+  </div>
+</section>
+
+
+
+  
+
+ <section id="certifications" class="fade-in">
+  <h2>Licenses & Certificats</h2>
+  <div class="timeline">
+
+    <div class="event">
+      <h3>IBM Data Science Professional Certificate <span class="muted">(Coursera, 2023)</span></h3>
+      <ul>
+        <li>Python, SQL, Machine Learning, Data Visualization, Applied Data Science Capstone.</li>
+      </ul>
+      <p class="muted">
+        <a href="https://coursera.org/verify/professional-cert/FBK5DT5Q7DZZ" target="_blank">
+          🌐 Voir le certificat officiel
+        </a>
+      </p>
+    </div>
+
+    <div class="event">
+      <h3>Deep Learning Specialization – DeepLearning.AI <span class="muted">(Coursera, 2023)</span></h3>
+      <ul>
+        <li>CNN, RNN, LSTM, Sequence Models, Structuring ML Projects.</li>
+      </ul>
+      <p class="muted">
+        <a href="https://coursera.org/verify/specialization/XY9JU04SH5H0" target="_blank">
+          🌐 Voir le certificat officiel
+        </a>
+      </p>
+    </div>
+
+    <div class="event">
+      <h3>Machine Learning Specialization – Stanford Online & DeepLearning.AI <span class="muted">(2024)</span></h3>
+      <ul>
+        <li>Regression & Classification, Unsupervised Learning, Recommenders, Reinforcement Learning.</li>
+      </ul>
+      <p class="muted">
+        <a href="https://coursera.org/verify/specialization/XY9JU04SH5H0" target="_blank">
+          🌐 Voir le certificat officiel
+        </a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="benevolat" class="fade-in">
+  <h2>Bénévolat & Engagement</h2>
+  <div class="timeline">
+
+    <div class="event">
+      <h3>2024 – 2025 — IGSM (International Geodetic Student Meeting)</h3>
+      <p><strong>Conseiller</strong></p>
+      
+    </div>
+
+    <div class="event">
+      <h3>2024 – 2025 — AMETOP</h3>
+      <p><strong>Chef de projet – Forum Park & Go</strong></p>
+     
+    </div>
+
+    <div class="event">
+      <h3>2023 – 2024 — AMETOP (Association Marocaine des Étudiants Topographes)</h3>
+      <p><strong>Président</strong></p>
+      
+    </div>
+
+  </div>
+</section>
+
+  <section id="contact" class="fade-in">
+    <h2>Contact</h2>
+    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:zakaria.benlarbi03@gmail.com">zakaria.benlarbi03@gmail.com</a></p>
+    <p><i class="fa-solid fa-phone"></i> 06 37 39 45 75</p>
+    <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/zakaria-ben-larbi" target="_blank">linkedin.com/in/zakaria-ben-larbi</a></p>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Zakaria Ben Larbi — Tous droits réservés
+  </footer>
+
+  <script>
+    // === PARTICULES ===
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particlesArray;
+    function initParticles() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      particlesArray = [];
+      const nb = Math.floor((canvas.width * canvas.height) / 30000);
+      for (let i = 0; i < nb; i++) {
+        particlesArray.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          s: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5
+        });
+      }
+    }
+    function animateParticles() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for (let p of particlesArray){
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>canvas.width)p.vx*=-1;
+        if(p.y<0||p.y>canvas.height)p.vy*=-1;
+        ctx.fillStyle="rgba(34,211,238,0.7)";
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+      }
+      for(let a=0;a<particlesArray.length;a++){
+        for(let b=a;b<particlesArray.length;b++){
+          const dx=particlesArray[a].x-particlesArray[b].x;
+          const dy=particlesArray[a].y-particlesArray[b].y;
+          const dist=dx*dx+dy*dy;
+          if(dist<8000){
+            const op=1-dist/8000;
+            ctx.strokeStyle=`rgba(34,211,238,${op})`;
+            ctx.lineWidth=0.5;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x,particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x,particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    window.addEventListener("resize",initParticles);
+    initParticles(); animateParticles();
+
+    // === SCROLL ANIM ===
+    const faders=document.querySelectorAll(".fade-in");
+    const obs=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        }
+      });
+    },{threshold:0.2});
+    faders.forEach(f=>obs.observe(f));
+
+    // === COMPTEUR ===
+    document.querySelectorAll(".stats strong").forEach(el=>{
+      const val=parseInt(el.textContent);
+      el.textContent="0";
+      let count=0;
+      const inc=val/100;
+      const step=()=>{
+        count+=inc;
+        if(count<val){el.textContent=Math.floor(count);requestAnimationFrame(step);}
+        else el.textContent=val+"+";
+      };
+      step();
+    });
+
+    document.getElementById("year").textContent=new Date().getFullYear();
+  </script>
+  <script>
+  document.querySelectorAll('.toplinks a').forEach(a=>{
+    a.addEventListener('click',()=> document.body.classList.remove('menu-open'));
+  });
+  const links=[...document.querySelectorAll('.toplinks a')];
+  const ids=links.map(a=>a.getAttribute('href')).filter(h=>h.startsWith('#'));
+  const sections=ids.map(id=>document.querySelector(id));
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===`#${e.target.id}`));
+      }
+    });
+  }, {rootMargin:"-30% 0px -60% 0px", threshold:0.01});
+  sections.forEach(s=> s && io.observe(s));
+</script>
+
+
+
+</body>
+</html>
