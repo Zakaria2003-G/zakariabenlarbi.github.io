@@ -215,6 +215,19 @@ section{scroll-margin-top: 92px}
 </head>
 
 <body>
+  <div id="google_translate_element" style="position:fixed; top:15px; right:15px; z-index:9999;"></div>
+
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'fr',
+    includedLanguages: 'en',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <nav class="topbar pro" id="top">
   <div class="topbar-inner">
     
@@ -721,6 +734,7 @@ section{scroll-margin-top: 92px}
 
 </body>
 </html>
+
 
 
 
